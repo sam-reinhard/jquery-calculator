@@ -74,12 +74,41 @@ $(document).ready(function() {
   var operator = "";
   var operatorClicked = false;
   var calculated = false;
-  
+
+  function reset(){
+    firstNumber = "";
+    secondNumber = "";
+    operator = "";
+    operatorClicked = false;
+    calculated = false;
+  };
+
+  $(".clear").on("click", function(){
+    reset();
+  });
+
+  $(".operator").on("click", function(){
+    if (operatorClicked === false){
+      operator = $(this).attr("value");
+      $("#operator").append(operator);
+      operatorClicked = true;
+    } 
+  });
+
   $(".number").on("click", function(){
-    var number = $(this).attr("value");
-    $("#first-number").append(number);
-    firstNumber+=number.toString();
-    console.log(firstNumber);
+    if (operatorClicked === false){
+      var number = $(this).attr("value");
+      $("#first-number").append(number);
+      firstNumber+=number.toString();
+      console.log(firstNumber);
+
+    } else if (operatorClicked === true){
+      var numberTwo = $(this).attr("value");
+      $("#second-number").append(numberTwo);
+      secondNumber+=numberTwo.toString();
+      console.log(secondNumber);
+    }
+    
   });
 });
 
