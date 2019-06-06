@@ -74,6 +74,7 @@ $(document).ready(function() {
   var operator = "";
   var operatorClicked = false;
   var calculated = false;
+  var solution;
 
   function reset(){
     firstNumber = "";
@@ -85,6 +86,10 @@ $(document).ready(function() {
 
   $(".clear").on("click", function(){
     reset();
+    $("#first-number").empty();
+    $("#second-number").empty();
+    $("#operator").empty();
+    $("#result").empty();
   });
 
   $(".operator").on("click", function(){
@@ -96,19 +101,47 @@ $(document).ready(function() {
   });
 
   $(".number").on("click", function(){
-    if (operatorClicked === false){
-      var number = $(this).attr("value");
-      $("#first-number").append(number);
-      firstNumber+=number.toString();
-      console.log(firstNumber);
+    if (calculated === false){
+
+      if (operatorClicked === false){
+        var number = $(this).attr("value");
+        $("#first-number").append(number);
+        firstNumber+=number.toString();
+        console.log(firstNumber);
 
     } else if (operatorClicked === true){
-      var numberTwo = $(this).attr("value");
-      $("#second-number").append(numberTwo);
-      secondNumber+=numberTwo.toString();
-      console.log(secondNumber);
+        var numberTwo = $(this).attr("value");
+        $("#second-number").append(numberTwo);
+        secondNumber+=numberTwo.toString();
+        console.log(secondNumber);
+      }
+    }  
+  });
+
+  $(".equal").on("click", function(){
+    if (calculated === false){
+      calculated = true;
+      if (operator === "plus"){
+        solution = parseInt(firstNumber) + parseInt(secondNumber);
+        $("#result").append(solution);
+
+      } else if (operator === "minus"){
+        solution = parseInt(firstNumber) - parseInt(secondNumber);
+        $("#result").append(solution);
+
+      } else if (operator ==="times"){
+        solution = parseInt(firstNumber) * parseInt(secondNumber);
+        $("#result").append(solution);
+
+      } else if (operator === "divide"){
+        solution = parseInt(firstNumber) / parseInt(secondNumber);
+        $("#result").append(solution);
+
+      } else if (operator === "power"){
+        solution = Math.pow(parseInt(firstNumber), parseInt(secondNumber));
+        $("#result").append(solution);
+      }
     }
-    
   });
 });
 
