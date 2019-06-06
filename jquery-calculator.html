@@ -69,11 +69,18 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+  var firstNumber = "";
+  var secondNumber = "";
+  var operator = "";
+  var operatorClicked = false;
+  var calculated = false;
+  
   $(".number").on("click", function(){
     var number = $(this).attr("value");
     $("#first-number").append(number);
+    firstNumber+=number.toString();
+    console.log(firstNumber);
   });
-
 });
 
 </script>
